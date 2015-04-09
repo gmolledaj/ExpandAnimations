@@ -168,11 +168,11 @@ function agordiGrandoDeTekstoj(slide as Object)
   Dim oTeksto As Object
   Dim oAlghustigo As Integer
   Dim io(5) As Integer
-  Dim oGrando ' Grando de objekto
-  Dim oDuaGrando ' Grando de objekto
-  Dim oLoko ' Loko de objekto
+  Dim oGrando As New com.sun.star.awt.Size ' Grando de objekto
+  Dim oDuaGrando As New com.sun.star.awt.Size ' Grando de objekto
+  Dim oLoko As New com.sun.star.awt.Point ' Loko de objekto
   Dim oNombriloDeAlineo As Integer
-    
+  
   numObjektoj = slide.getCount()
   for i = 0 to numObjektoj-1
     objekto = slide.getByIndex(i)
@@ -224,7 +224,7 @@ function agordiGrandoDeTekstoj(slide as Object)
           oGrando = objekto.getSize()
           oLoko = objekto.getPosition()
           objekto.TextAutoGrowWidth = true
-          if objekto.FrameRect.Width < oGrando.Width then
+          if objekto.Size.Width < oGrando.Width then
             if io(0)+io(1)+io(2)+io(3)+io(4) = 1 then
               if oAlghustigo = com.sun.star.drawing.TextHorizontalAdjust.CENTER then
                 oLoko.X = oLoko.X + (oGrando.Width - objekto.FrameRect.Width)/2
@@ -241,6 +241,11 @@ function agordiGrandoDeTekstoj(slide as Object)
               end if
             end if
             oGrando.Width = objekto.FrameRect.Width
+          end if
+          if objekto.Size.Width > oGrando.Width and objekto.Size.Height <= oGrando.Height then
+            objekto.TextAutoGrowHeight = false
+            objekto.TextAutoGrowWidth = false
+            objekto.setSize(oGrando)
           end if
           oDuaGrando = objekto.getSize()
           oDuaGrando.Height = 2
@@ -259,7 +264,7 @@ function agordiGrandoDeTekstoj(slide as Object)
           objekto.TextAutoGrowWidth = false
           objekto.setSize(oGrando)
           objekto.setPosition(oLoko)
-          objekto.TextVerticalAdjust = com.sun.star.drawing.TextVerticalAdjust.BLOCK
+          objekto.TextVerticalAdjust = com.sun.star.drawing.TextVerticalAdjust.TOP 'BOTTOM
         end if
         if io(0)+io(1)+io(2)+io(3)+io(4) = 1 then
           objekto.TextHorizontalAdjust = oAlghustigo
