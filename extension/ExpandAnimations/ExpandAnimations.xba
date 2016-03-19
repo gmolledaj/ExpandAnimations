@@ -181,6 +181,7 @@ function agordiGrandoDeTekstoj(slide as Object)
     oTipo = objekto.GetShapeType()
     if oTipo = &quot;com.sun.star.drawing.CustomShape&quot; then
       objekto.TextAutoGrowWidth = false
+      objekto.TextAutoGrowHeight = false
     end if
     if oTipo = &quot;com.sun.star.drawing.TextShape&quot; then
       oAlghustigo = -1
