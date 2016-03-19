@@ -137,7 +137,7 @@ function expandDocument(doc as Object)
         agordiGrandoDeTekstoj(slide)
         if hasAnimation(slide) then
             n = countAnimationSteps(slide)
-            if n > 1 then
+            if n > 1 and not somethingWrong(slide) then
                 origName = slide.Name
                 replicateSlide(doc, slide, n)
                 visArray = getShapeVisibility(slide, n)
@@ -157,6 +157,15 @@ function expandDocument(doc as Object)
 
 end function
 
+' by cbecker workaround Inadmissible value or data type github.com monperrus ExpandAnimations issues 8
+function somethingWrong( slide as Object )
+  shapes = getAnimatedShapes(slide)
+  if UBound(shapes) = -1 then
+    somethingWrong = true
+  else
+    somethingWrong = false
+  end if
+end function
 
 ' Agordi grando de tekstoj (The English language discriminate by country of birth)
 function agordiGrandoDeTekstoj(slide as Object)
