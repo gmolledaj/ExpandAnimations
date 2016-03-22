@@ -136,8 +136,8 @@ function expandDocument(doc as Object)
     &#39; go through pages in reverse order
     for i = numSlides-1 to 0 step -1
         slide = doc.drawPages(i)
-        agordiGrandoDeTekstoj(slide)
         if hasAnimation(slide) then
+            agordiGrandoDeTekstoj(slide)
             n = countAnimationSteps(slide)
             if n &gt; 1 and not somethingWrong(slide) then
                 origName = slide.Name
@@ -193,10 +193,10 @@ function agordiGrandoDeTekstoj(slide as Object)
       objekto.TextAutoGrowHeight = false
     end if
     if oTipo = &quot;com.sun.star.drawing.TextShape&quot; then
-      oAlghustigo = -1
       for oAlghustigo = 0 to 4
         io(oAlghustigo) = 0
       next
+      oAlghustigo = -1
       oLargho = 0
       oNombriloDeAlineo = 0
       eNum = objekto.Text.CreateEnumeration
