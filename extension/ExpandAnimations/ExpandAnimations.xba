@@ -252,7 +252,9 @@ function agordiGrandoDeTekstoj(slide as Object)
                 oLoko.X = oLoko.X + (oGrando.Width - objekto.FrameRect.Width)
               end if
             end if
-            oGrando.Width = objekto.FrameRect.Width
+            if objekto.LineStyle = 0 then
+              oGrando.Width = objekto.FrameRect.Width
+            end if
           end if
           if objekto.Size.Width &gt; oGrando.Width and objekto.Size.Height &lt;= oGrando.Height then
             objekto.TextAutoGrowHeight = false
@@ -270,7 +272,9 @@ function agordiGrandoDeTekstoj(slide as Object)
             if objekto.TextVerticalAdjust = com.sun.star.drawing.TextVerticalAdjust.BOTTOM then
               oLoko.Y = oLoko.Y + (oGrando.Height - objekto.FrameRect.Height)
             end if
-            oGrando.Height = objekto.FrameRect.Height
+            if objekto.LineStyle = 0 then
+              oGrando.Height = objekto.FrameRect.Height
+            end if
           end if
           objekto.TextAutoGrowHeight = false
           objekto.TextAutoGrowWidth = false
